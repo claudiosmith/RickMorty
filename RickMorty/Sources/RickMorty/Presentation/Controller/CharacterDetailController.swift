@@ -12,7 +12,6 @@ import RxCocoa
 
 protocol CharacterDetailControllerProtocol: class {
     func backToCharacterCoordinator()
-//    func backToFavoriteCoordinator()
 }
 
 class CharacterDetailController: BaseController {
@@ -65,6 +64,4 @@ class CharacterDetailController: BaseController {
         ])
     }
     
-    
-
 }

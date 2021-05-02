@@ -22,6 +22,7 @@ class SegmentedControl: BaseSegmentedControl {
         self.viewModel = viewModel
         selectedSegmentIndex = viewModel.isFavoriteSelected ? Numbers.oneInt : Numbers.zeroInt
         addTarget(self, action: #selector(self.segmentedValueChanged(sender:)), for: .valueChanged)
+        
         removeBorders()
     }
     
