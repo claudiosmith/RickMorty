@@ -28,6 +28,7 @@ struct CharacterPlistHandler: CharacterPlistHandlerProtocol {
             let data = try Data.init(contentsOf: url)
             let favPlist = try plistDecoder.decode([FavouriteViewData].self, from: data)
             let newlists = convertFromPlist(favplist: favPlist, characterList: characters)
+            
             return newlists
         } catch {
             print(error)
