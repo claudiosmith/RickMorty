@@ -66,6 +66,11 @@ extension Dictionary {
 
 extension FileManager {
 
+    static func checkPath(for filename: String, using `extension`: String) -> Bool {
+        let path = "\(filename).\(`extension`)"
+        return (FileManager.default.fileExists(atPath: path))
+    }
+    
     static func getUrl(for filename: String, using `extension`: String) -> URL? {
         
         let fullname = "\(filename).\(`extension`)"

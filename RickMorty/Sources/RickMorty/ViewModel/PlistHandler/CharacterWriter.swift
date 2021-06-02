@@ -17,7 +17,6 @@ protocol CharacterPlistHandlerProtocol {
 struct CharacterPlistHandler: CharacterPlistHandlerProtocol {
     
     func read(using characters: [CharacterViewData]) -> (charlist: [CharacterViewData], favlist: [CharacterViewData])? {
-        
         guard let url = FileManager.getUrl(for: Plist.favouriteFilename,
                                            using: Plist.extension) else {
             print(Plist.errorMessage)
@@ -28,9 +27,10 @@ struct CharacterPlistHandler: CharacterPlistHandlerProtocol {
             let data = try Data.init(contentsOf: url)
             let favPlist = try plistDecoder.decode([FavouriteViewData].self, from: data)
             let newlists = convertFromPlist(favplist: favPlist, characterList: characters)
-            
             return newlists
         } catch {
+            let nserr = error as NSError
+            guard nserr.code != Plist.errorFirstTimeCreate else { return nil }
             print(error)
         }
         return nil
@@ -68,6 +68,7 @@ struct CharacterPlistHandler: CharacterPlistHandlerProtocol {
             try plistData.write(to: url)
             
         } catch {
+//            guard error != 260 else { return }
             print(error)
         }
     }
