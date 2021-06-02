@@ -68,7 +68,6 @@ struct CharacterPlistHandler: CharacterPlistHandlerProtocol {
             try plistData.write(to: url)
             
         } catch {
-//            guard error != 260 else { return }
             print(error)
         }
     }
