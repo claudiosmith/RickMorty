@@ -64,6 +64,7 @@ struct Plist {
     static let favouriteFilename = "favourites"
     static let `extension` = "plist"
     static let errorMessage = "Erro ao buscar url do arquivo plist"
+    static let errorFirstTimeCreate = 260
 }
 
 struct CharacterVal {
