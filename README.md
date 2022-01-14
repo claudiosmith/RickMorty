@@ -1,12 +1,12 @@
 
-Swift Package Manager Library iOS que utiliza a API da série Rick and Morty
+Swift Package Manager Library iOS that uses TV Show Rick and Morty API
 
-* Requisitos: Xcode 12, iOS 13
+* Minimum requirements: Xcode 12, iOS 13
 
-* Linguagem: Swift 5.3
+* Language: Swift 5.3
 
-* Arquitetura: MVVM e Coordinator (MVVM-c)
+* Architecture: MVVM and Coordinator (MVVM-c)
 
-* Dependências externas: RXSwift
+* Third-party: RXSwift
 
-Acompanha projeto demo com a library já adicionada, bastando executar o projeto para vê-la em funcionamento.
+It comes with demo project with built-in library, just click the play button to see the app running
