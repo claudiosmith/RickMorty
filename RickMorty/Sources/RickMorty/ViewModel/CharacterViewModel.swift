@@ -19,7 +19,7 @@ class CharacterViewModel {
     let observerCharacterList = BehaviorRelay<[CharacterViewData]>(value: [])
     
     var service: CharacterServiceProtocol?
-    var info: Info!
+    var info: Info?
     var loadingStatus = false
     var isFavoriteSelected = false
         
@@ -27,9 +27,11 @@ class CharacterViewModel {
     lazy var favouriteList = [CharacterViewData]()
     
     private let disposeBag = DisposeBag()
-    let cache: NSCache<NSString, UIImage>!
+    var cache: NSCache<NSString, UIImage>?
+    
+    init(){}
 
-    init(_ service: CharacterServiceProtocol?, cache: NSCache<NSString, UIImage>!) {
+    init(_ service: CharacterServiceProtocol?, cache: NSCache<NSString, UIImage>?) {
         self.service = service
         self.cache = cache
 
@@ -49,7 +51,7 @@ class CharacterViewModel {
             let characters = builder.set(using: character, favourites: self.favouriteList)
                                     .build()
             
-            self.characterList += characters
+            self.characterList += characters ?? [CharacterViewData]()
             self.readFavourites()
             self.observableCharacters()
             self.info = root.info
@@ -82,9 +84,9 @@ class CharacterViewModel {
         self.observerCharacterList.accept(self.characterList)
     }
     
-    func fetchImage(_ data: CharacterViewData, _ completion: @escaping (Completion)) {
+    func fetchImage(_ data: CharacterViewData?, _ completion: @escaping (Completion)) {
         
-        guard let url = URL(string: data.imageLink) else { return }
+        guard let url = URL(string: data?.imageLink ?? String.empty), let data = data else { return }
         
         service?.fetchImage(url, using: cache) { [weak self] result in
             switch result {
@@ -109,9 +111,8 @@ class CharacterViewModel {
         self.favouriteList = favourites.favlist
     }
 
-    func handleFavourite(viewdata: CharacterViewData) {
-
-        guard isFavoriteSelected == false,
+    func handleFavourite(viewdata: CharacterViewData?) {
+        guard isFavoriteSelected == false, let viewdata = viewdata,
               let index = updateCharacter(viewdata: viewdata) else { return }
         
         updateFavourite(viewdata: viewdata, index: index)

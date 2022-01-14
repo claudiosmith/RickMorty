@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CharacterControllerProtocol: class {
-    func navigateToCharacterDetails(_ viewModel: CharacterViewModel, viewdata: CharacterViewData)
+protocol CharacterControllerProtocol: AnyObject {
+    func navigateToCharacterDetails(_ viewModel: CharacterViewModel?, viewdata: CharacterViewData)
 }
 
 class CharacterControllerCoordinator: Coordinator {
@@ -24,7 +24,7 @@ class CharacterControllerCoordinator: Coordinator {
     
     func start() {
         let service: CharacterServiceProtocol = CharacterService()
-        let cache: NSCache<NSString, UIImage>! = NSCache()
+        let cache: NSCache<NSString, UIImage> = NSCache()
         let viewModel = CharacterViewModel(service, cache: cache)
         
         let bundle = Bundle(for: RickMortyFacade.self)

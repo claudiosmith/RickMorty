@@ -12,20 +12,18 @@ import RxCocoa
 
 class CharacterView: UIView {
 
-    var viewModel: CharacterViewModel!
-    var segmentedControl: SegmentedControl!
-    var widthConstraint: NSLayoutConstraint!
-    var leftConstraint: NSLayoutConstraint!
-    var collectionView: UICollectionView!
-    
+    weak var delegate: CharacterControllerProtocol?
+    lazy var leftConstraint = NSLayoutConstraint()
+    lazy var collectionView = UICollectionView()
+    lazy var segmentedControl = SegmentedControl()
     lazy var lineview = UIView()
-    weak var delegate: CharacterControllerProtocol!
     lazy var character = [CharacterViewData]()
     lazy var indicatorView = UIActivityIndicatorView()
-   
+
+    var viewModel: CharacterViewModel?
     let disposeBag = DisposeBag()
     
-    convenience init(delegate: CharacterControllerProtocol, viewModel: CharacterViewModel) {
+    convenience init(delegate: CharacterControllerProtocol?, viewModel: CharacterViewModel) {
         self.init()
         self.viewModel = viewModel
         self.delegate = delegate
@@ -82,7 +80,7 @@ class CharacterView: UIView {
     }
     
     private func bindingLine() {
-        viewModel.observerLine.observeOn(MainScheduler.instance)
+        viewModel?.observerLine.observeOn(MainScheduler.instance)
             .subscribe (onNext: { [weak self] segment in
                 guard let segment = segment else { return }
                 self?.animate(with: segment)

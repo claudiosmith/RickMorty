@@ -13,8 +13,8 @@ class CharacterCell: BaseCollectionViewCell {
     lazy var rickyImage: UIImageView = UIImageView()
     lazy var favButton: UIButton = UIButton()
     
-    var viewModel: CharacterViewModel!
-    var character: CharacterViewData! {
+    var viewModel: CharacterViewModel?
+    var character: CharacterViewData? {
         didSet {
             bindData(data: character)
         }
@@ -32,7 +32,7 @@ class CharacterCell: BaseCollectionViewCell {
     }
     
     @objc func favAction() {
-         self.viewModel.handleFavourite(viewdata: character)
+        self.viewModel?.handleFavourite(viewdata: character)
     }
     
     private func setupFavButton(with data: CharacterViewData) {
@@ -54,7 +54,7 @@ extension CharacterCell {
     
     func setImage(with data: CharacterViewData) {
         
-        viewModel.fetchImage(data) { [weak self] result in
+        viewModel?.fetchImage(data) { [weak self] result in
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {

@@ -32,12 +32,3 @@ extension UIViewController {
         return Self(nibName: self.getClassId(), bundle: self.getBundle())
     }
 }
-
-extension UINavigationController {
-
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-        interactivePopGestureRecognizer?.delegate = nil
-    }
-
-}

@@ -6,7 +6,6 @@
 //  Copyright © 2020 smith.c. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct Endpoint {
@@ -24,7 +23,6 @@ struct Constants {
     static let backgroundAlert = #colorLiteral(red: 0.1729443916, green: 0.1617187862, blue: 0.1567400009, alpha: 0.9065263856)
     static let json = "json"
     static let fileNotFound = "couldn't find the file"
-    static let emptyString = ""
     static let cancel = "Cancelar"
     static let sort = "Ordenar"
     static let filter = "Filtrar"

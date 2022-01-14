@@ -26,8 +26,3 @@ extension UICollectionView {
     }
 
 }
-
-open class BaseCollectionViewCell: UICollectionViewCell {
-    
-    open func bindData<T>(data: T) {}
-}

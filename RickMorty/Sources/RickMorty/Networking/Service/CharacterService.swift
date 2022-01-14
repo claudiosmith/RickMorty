@@ -12,7 +12,7 @@ import RxSwift
 protocol CharacterServiceProtocol {
     
     func fetchCharacter(_ url: URL) -> Observable<Root>
-    func fetchImage(_ url: URL, using cache: NSCache<NSString, UIImage>, _ completion: @escaping (Completion))
+    func fetchImage(_ url: URL, using cache: NSCache<NSString, UIImage>?, _ completion: @escaping (Completion))
 }
 
 struct CharacterService: CharacterServiceProtocol {
@@ -38,9 +38,9 @@ struct CharacterService: CharacterServiceProtocol {
         }
     }
     
-    func fetchImage(_ url: URL, using cache: NSCache<NSString, UIImage>, _ completion: @escaping (Completion)) {
+    func fetchImage(_ url: URL, using cache: NSCache<NSString, UIImage>?, _ completion: @escaping (Completion)) {
     
-        if let image = cache.object(forKey: NSString(string: url.absoluteString)) {
+        if let image = cache?.object(forKey: NSString(string: url.absoluteString)) {
             completion(.success(image))
             return
         }
@@ -48,7 +48,7 @@ struct CharacterService: CharacterServiceProtocol {
         NetworkClient().loadImage(url) { result in
             switch result {
             case .success(let image):
-                cache.setObject(image, forKey: NSString(string: url.absoluteString))
+                cache?.setObject(image, forKey: NSString(string: url.absoluteString))
                 completion(.success(image))
             case .failure(let error):
                 completion(.failure(error))

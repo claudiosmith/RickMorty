@@ -12,7 +12,7 @@ struct URLBuilder {
     
     func getUrl(with info: Info?) -> URL? {
         
-        var urlText = Constants.emptyString
+        var urlText = String.empty
         if let info = info, let next = info.next {
             urlText = next
         } else {

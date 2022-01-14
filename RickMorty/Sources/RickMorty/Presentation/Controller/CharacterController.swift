@@ -12,9 +12,9 @@ import RxCocoa
 
 class CharacterController: BaseController {
     
-    var delegate: CharacterControllerProtocol!
-    var viewModel: CharacterViewModel!
-    var characterView: CharacterView!
+    var delegate: CharacterControllerProtocol?
+    lazy var viewModel = CharacterViewModel()
+    lazy var characterView = CharacterView()
     lazy var indicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {

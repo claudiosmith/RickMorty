@@ -13,7 +13,7 @@ struct NetworkHandlingError {
 
     func errorHandler<T>(_ error: Error?, _ observer: AnyObserver<T>)  {
 
-        var gnerror: CustomNetworkError!
+        var gnerror: CustomNetworkError
 
         switch error?._code {
         case NSURLErrorTimedOut:
@@ -31,7 +31,7 @@ struct NetworkHandlingError {
     
     func errorCompletionHandler(_ error: Error?, _ completion: Completion)  {
 
-        var gnerror: CustomNetworkError!
+        var gnerror: CustomNetworkError
 
         switch error?._code {
         case NSURLErrorTimedOut:

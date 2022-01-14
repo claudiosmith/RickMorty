@@ -10,16 +10,16 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol CharacterDetailControllerProtocol: class {
+protocol CharacterDetailControllerProtocol: AnyObject {
     func backToCharacterCoordinator()
 }
 
 class CharacterDetailController: BaseController {
     
-    var viewModel: CharacterViewModel!
-    var viewdata: CharacterViewData!
-    var characterView: CharacterDetailView!
-    weak var delegate: CharacterDetailControllerProtocol!
+    var viewModel: CharacterViewModel?
+    var viewdata: CharacterViewData?
+    lazy var characterView = CharacterDetailView()
+    weak var delegate: CharacterDetailControllerProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +29,12 @@ class CharacterDetailController: BaseController {
         loadDetailView()
     }
     
-    private func setImage(with data: CharacterViewData) {
+    private func setImage(with data: CharacterViewData?) {
         
-        viewModel.fetchImage(data) { [weak self] result in
+        viewModel?.fetchImage(data) { [weak self] result in
             switch result {
             case .success(let image):
-                 self?.viewdata.image = image
+                self?.viewdata?.image = image
                  break
             case .failure(let error):
                 guard let error = error else { return }

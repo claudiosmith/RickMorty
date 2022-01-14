@@ -15,12 +15,12 @@ enum SegmentedChar: Int {
 }
 
 class SegmentedControl: BaseSegmentedControl {
-    var viewModel: CharacterViewModel!
+    var viewModel: CharacterViewModel?
     
-    func setup(viewModel: CharacterViewModel) {
+    func setup(viewModel: CharacterViewModel?) {
        
         self.viewModel = viewModel
-        selectedSegmentIndex = viewModel.isFavoriteSelected ? Numbers.oneInt : Numbers.zeroInt
+        selectedSegmentIndex = viewModel?.isFavoriteSelected ?? false ? Numbers.oneInt : Numbers.zeroInt
         addTarget(self, action: #selector(self.segmentedValueChanged(sender:)), for: .valueChanged)
         
         removeBorders()
@@ -31,7 +31,7 @@ class SegmentedControl: BaseSegmentedControl {
         guard let selected: SegmentedChar = SegmentedChar(rawValue: sender.selectedSegmentIndex)
         else { return }
         
-        viewModel.segmentedSelected(with: selected)
+        viewModel?.segmentedSelected(with: selected)
     }
 
     override init(items: [Any]?) {

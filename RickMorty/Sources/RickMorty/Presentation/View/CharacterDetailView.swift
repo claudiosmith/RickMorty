@@ -10,12 +10,12 @@ import UIKit
 
 class CharacterDetailView: UIView {
 
-    var viewdata: CharacterViewData!
+    var viewdata: CharacterViewData?
     
-    convenience init(viewdata: CharacterViewData) {
+    convenience init(viewdata: CharacterViewData?) {
         self.init()
         self.viewdata = viewdata
-        self.rickyImage.image = viewdata.image
+        self.rickyImage.image = viewdata?.image
         
         bindData(data: viewdata)
         initSubView()
@@ -44,12 +44,12 @@ class CharacterDetailView: UIView {
     }
     
     private func setupStatusSpecie(data: CharacterViewData) {
-        let status = data.status?.rawValue ?? Constants.emptyString
+        let status = data.status?.rawValue ?? String.empty
         statusLabel.text = "\(status) - \(data.species)"
     }
     
     private func setupBallColor() {
-        ballColor.backgroundColor = viewdata.status?.color
+        ballColor.backgroundColor = viewdata?.status?.color
         ballColor.layer.masksToBounds = true
         ballColor.layer.cornerRadius = DetailVal.ballRadius / Numbers.half
     }

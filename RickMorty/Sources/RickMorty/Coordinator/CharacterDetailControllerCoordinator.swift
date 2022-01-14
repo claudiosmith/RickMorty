@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol CharacterDetailCoordinatorProtocol: class {
+protocol CharacterDetailCoordinatorProtocol: AnyObject {
     func backToPreviousController()
 }
 
 class CharacterDetailControllerCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
-    var viewModel: CharacterViewModel!
-    var viewData: CharacterViewData!
+    var viewModel: CharacterViewModel?
+    var viewData: CharacterViewData?
     
     weak var delegate: CharacterDetailCoordinatorProtocol?
     unowned let navigationController: NavigationController

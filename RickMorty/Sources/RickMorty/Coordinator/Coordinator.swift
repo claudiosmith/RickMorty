@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public protocol Coordinator: class {
+public protocol Coordinator: AnyObject {
 
     var childCoordinators: [Coordinator] { get set }
     init(_ navigator: NavigationController)

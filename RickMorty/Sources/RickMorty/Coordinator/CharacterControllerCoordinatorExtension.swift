@@ -10,7 +10,7 @@ import UIKit
 
 extension CharacterControllerCoordinator: CharacterControllerProtocol {
     
-    func navigateToCharacterDetails(_ viewModel: CharacterViewModel, viewdata: CharacterViewData) {
+    func navigateToCharacterDetails(_ viewModel: CharacterViewModel?, viewdata: CharacterViewData) {
         
         let coordinator = CharacterDetailControllerCoordinator(navigationController)
         coordinator.delegate = self

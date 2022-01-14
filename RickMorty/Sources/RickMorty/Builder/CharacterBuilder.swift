@@ -10,7 +10,7 @@ import UIKit
 
 protocol CharacterBuilderProtocol {
     mutating func set(using data: [Character], favourites: [CharacterViewData]) -> Self
-    var characterList: [CharacterViewData]! { get set }
+    var characterList: [CharacterViewData]? { get set }
 }
 
 extension CharacterBuilderProtocol {
@@ -20,7 +20,7 @@ extension CharacterBuilderProtocol {
         return self
     }
 
-    private mutating func loadCharacter(_ data: [Character], _ favourites: [CharacterViewData]) {
+    private mutating func loadCharacter(_ data: [Character], _ favourites: [CharacterViewData]?) {
 
         data.forEach() { element in
             
@@ -36,7 +36,7 @@ extension CharacterBuilderProtocol {
                                               origin: element.origin.name,
                                               favourite: isFavourite,
                                               favButtonTitle: setFavButtonTitle(isFavourite))
-            characterList.append(character)
+            characterList?.append(character)
         }
     }
 
@@ -53,20 +53,20 @@ extension CharacterBuilderProtocol {
         return status
     }
     
-    private func readFavourite(_ id: String, _ favourites: [CharacterViewData]) -> Bool {
-        guard let ind = favourites.firstIndex( where: { $0.id == id }) else {
+    private func readFavourite(_ id: String, _ favourites: [CharacterViewData]?) -> Bool {
+        guard let ind = favourites?.firstIndex( where: { $0.id == id }), let isFavourite = favourites?[ind].favourite else {
               return false
         }
-        return favourites[ind].favourite
+        return isFavourite
     }
     
-    func build() -> [CharacterViewData] {
+    func build() -> [CharacterViewData]? {
         return characterList
     }
 }
 
 struct CharacterBuilder: CharacterBuilderProtocol {
-    var characterList: [CharacterViewData]!
+    var characterList: [CharacterViewData]?
 
     init() {
         characterList = [CharacterViewData]()
