@@ -22,9 +22,8 @@ struct CustomNetworkError: CustomNetworkErrorProtocol {
     public var title: String?
     public var code: Int?
     public let message: String?
-
-    var errDescription: String?     { return _description }
-    var failureDescription: String? { return _description }
+    public var failureDescription: String? { return _description }
+    
     private var _description: String
 
     public var localizedDescription: String {
@@ -67,26 +66,26 @@ enum ServiceError: Error {
     case decodeError
     case noInternet
     case timeout
-    case custom
+    case unknown
 
     public var errorMessage: String {
         switch self {
         case .apiError:
-            return "Api não encontrada ou erro remoto desconhecido"
+            return "Api not found or unknown remote error"
         case .invalidEndpoint:
-            return "Endpoint não encontrado"
+            return "Endpoint not found"
         case .invalidResponse:
-            return "Response retornou vazio"
+            return "Response returned empty"
         case .invalidData:
-            return "Response retornou dados vazios ou inválidos"
+            return "Response contains empty or invalid data"
         case .decodeError:
-            return "Erro ao decodificar o data retornado"
+            return "Error on decode data"
         case .noInternet:
-            return "Sem conexão de internet"
+            return "No internet connection"
         case .timeout:
-            return "Esgotou-se o tempo limite de conexão"
-        case .custom:
-            return "Ocorreu um erro desconhecido"
+            return "Connection timeout"
+        case .unknown:
+            return "An unknown error occurred"
         }
     }
 }

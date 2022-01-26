@@ -19,12 +19,15 @@ class CharacterController: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        indicatorView.create()
+        indicatorView.start()
         loadCharacterView()
     }
 
     private func loadCharacterView() {
         characterView = CharacterView(delegate: delegate, viewModel: viewModel)
         addCharacterView()
+        bindingError()
     }
     
     private func addCharacterView() {
@@ -38,4 +41,19 @@ class CharacterController: BaseController {
             characterView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Numbers.zeroCGFloat)
         ])
     }
+    
+    func bindingError() {
+        
+        viewModel.onError = { [weak self] (error) in
+            guard let self = self, let error = error,
+            let failureDescription = error.failureDescription else { return }
+            print("network error: ", failureDescription)
+            
+            DispatchQueue.main.async {
+                self.indicatorView.stop()
+                self.alert(message: failureDescription, title: Bundle.main.appName, completion: {_ in })
+            }
+        }
+    }
+    
 }

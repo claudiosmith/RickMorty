@@ -11,7 +11,7 @@ import RxSwift
 
 protocol CharacterServiceProtocol {
     
-    func fetchCharacter(_ url: URL) -> Observable<Root>
+    func fetchCharacter(_ url: URL) -> Observable<RmRoot>
     func fetchImage(_ url: URL, using cache: NSCache<NSString, UIImage>?, _ completion: @escaping (Completion))
 }
 
@@ -20,12 +20,12 @@ struct CharacterService: CharacterServiceProtocol {
     private let network: NetworkClientProtocol = NetworkClient()
     private let disposeBag = DisposeBag()
 
-    func fetchCharacter(_ url: URL) -> Observable<Root> {
+    func fetchCharacter(_ url: URL) -> Observable<RmRoot> {
 
         return Observable.create { observer -> Disposable in
             network.request(url).subscribe( onNext: { data in
                 do {
-                    let root = try JSONDecoder().decode(Root.self, from: data)
+                    let root = try JSONDecoder().decode(RmRoot.self, from: data)
                     observer.onNext(root)
                 } catch {
                     print(error)

@@ -9,10 +9,9 @@
 import UIKit
 import RxSwift
 
-
-enum Result<T, U: Error> {
+enum Result<T, U: CustomNetworkErrorProtocol> {
     case success(T)
-    case failure(U?)
+    case failure(U)
 }
 
 typealias Completion = (Result<UIImage, CustomNetworkError>) -> Void

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  XCImage.swift
 //  
 //
 //  Created by Claudio Smith on 16/02/2021.

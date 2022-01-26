@@ -41,4 +41,9 @@ extension Bundle {
         return nil
     }
     
+    var appName: String {
+        let name = object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+        return name ?? object(forInfoDictionaryKey: kCFBundleNameKey as String) as! String
+    }
+    
 }

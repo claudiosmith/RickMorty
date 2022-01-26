@@ -32,7 +32,7 @@ class CharacterCell: BaseCollectionViewCell {
     }
     
     @objc func favAction() {
-        self.viewModel?.handleFavourite(viewdata: character)
+        self.viewModel?.updateFavourite(viewdata: character)
     }
     
     private func setupFavButton(with data: CharacterViewData) {
@@ -62,7 +62,6 @@ extension CharacterCell {
                 }
                 break
             case .failure(let error):
-                guard let error = error else { return }
                 print("error: ", error.localizedDescription)
             }
         }

@@ -14,15 +14,17 @@ class CharacterViewModel {
 
     let observerPhoto: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     let observerLine: BehaviorRelay<SegmentedChar?> = BehaviorRelay(value: nil)
-    let error = BehaviorRelay<Error?>(value: nil)
+    let unitError = BehaviorRelay<Error?>(value: nil)
+    let error = PublishSubject<Error>()
     let observerCharacter = BehaviorRelay<[CharacterViewData]>(value: [])
     let observerCharacterList = BehaviorRelay<[CharacterViewData]>(value: [])
     
     var service: CharacterServiceProtocol?
     var info: Info?
     var loadingStatus = false
-    var isFavoriteSelected = false
-        
+    var isFavoriteTabSelected = false
+
+    lazy var onError: ((CustomNetworkError?) -> Void) = {_ in}
     lazy var characterList = [CharacterViewData]()
     lazy var favouriteList = [CharacterViewData]()
     
@@ -34,15 +36,13 @@ class CharacterViewModel {
     init(_ service: CharacterServiceProtocol?, cache: NSCache<NSString, UIImage>?) {
         self.service = service
         self.cache = cache
-
-        fetchCharacters()
     }
 
     func fetchCharacters(_ info: Info? = nil) {
 
         guard let url = URLBuilder().getUrl(with: info) else { return }
 
-        isFavoriteSelected = false
+        isFavoriteTabSelected = false
         service?.fetchCharacter(url).subscribe( onNext: { [weak self] root in
             guard let self = self else { return }
 
@@ -58,12 +58,13 @@ class CharacterViewModel {
             self.loadingStatus = false
             
             }, onError: { [weak self] error in
-                self?.error.accept(error)
+                self?.unitError.accept(error)
+                self?.onError(error as? CustomNetworkError)
             }
         ).disposed(by: disposeBag)
     }
     
-    func segmentedSelected(with selected: SegmentedChar) {
+    func tabSelected(with selected: SegmentedChar) {
         observerLine.accept(selected)
         
         guard selected == .favorites else {
@@ -74,12 +75,12 @@ class CharacterViewModel {
     }
     
     func fetchFavCharacters() {
-        isFavoriteSelected = true
+        isFavoriteTabSelected = true
         self.observerCharacter.accept(self.favouriteList)
     }
     
     func observableCharacters() {
-        isFavoriteSelected = false
+        isFavoriteTabSelected = false
         self.observerCharacter.accept(self.characterList)
         self.observerCharacterList.accept(self.characterList)
     }
@@ -111,12 +112,11 @@ class CharacterViewModel {
         self.favouriteList = favourites.favlist
     }
 
-    func handleFavourite(viewdata: CharacterViewData?) {
-        guard isFavoriteSelected == false, let viewdata = viewdata,
+    func updateFavourite(viewdata: CharacterViewData?) {
+        guard isFavoriteTabSelected == false, let viewdata = viewdata,
               let index = updateCharacter(viewdata: viewdata) else { return }
         
         updateFavourite(viewdata: viewdata, index: index)
-        CharacterPlistHandler().write(favouriteList)
         observerCharacter.accept(characterList)
     }
     
@@ -142,11 +142,12 @@ class CharacterViewModel {
             favouriteList.remove(at: ind)
             return
         }
+        CharacterPlistHandler().write(favouriteList)
     }
     
     func loadInfinityScroll() {
         
-        guard loadingStatus == false && isFavoriteSelected == false else { return }
+        guard loadingStatus == false && isFavoriteTabSelected == false else { return }
         loadingStatus = true
         self.fetchCharacters(info)
     }

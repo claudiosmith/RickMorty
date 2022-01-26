@@ -18,8 +18,7 @@ class CharacterView: UIView {
     lazy var segmentedControl = SegmentedControl()
     lazy var lineview = UIView()
     lazy var character = [CharacterViewData]()
-    lazy var indicatorView = UIActivityIndicatorView()
-
+    
     var viewModel: CharacterViewModel?
     let disposeBag = DisposeBag()
     

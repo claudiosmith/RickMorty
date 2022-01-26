@@ -13,7 +13,7 @@ import RxCocoa
 extension CharacterView {
 
     func bindingCharacter() {
-        
+
         viewModel?.observerCharacterList.observeOn(MainScheduler.instance)
             .subscribe (onNext: { [weak self] characters in
                 self?.character = characters
@@ -34,6 +34,7 @@ extension CharacterView {
             self.delegate?.navigateToCharacterDetails(self.viewModel, viewdata: model)
             }).disposed(by: disposeBag)
     }
+
 }
 
 extension CharacterView: UICollectionViewDelegateFlowLayout {

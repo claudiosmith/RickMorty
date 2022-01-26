@@ -23,9 +23,11 @@ class CharacterControllerCoordinator: Coordinator {
     }
     
     func start() {
+        
         let service: CharacterServiceProtocol = CharacterService()
         let cache: NSCache<NSString, UIImage> = NSCache()
         let viewModel = CharacterViewModel(service, cache: cache)
+        viewModel.fetchCharacters()
         
         let bundle = Bundle(for: RickMortyFacade.self)
         let controller = CharacterController(nibName: nil, bundle: bundle)

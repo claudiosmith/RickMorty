@@ -35,9 +35,8 @@ class CharacterDetailController: BaseController {
             switch result {
             case .success(let image):
                 self?.viewdata?.image = image
-                 break
+                break
             case .failure(let error):
-                guard let error = error else { return }
                 print("error: ", error.localizedDescription)
             }
         }

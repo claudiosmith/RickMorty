@@ -20,7 +20,7 @@ class SegmentedControl: BaseSegmentedControl {
     func setup(viewModel: CharacterViewModel?) {
        
         self.viewModel = viewModel
-        selectedSegmentIndex = viewModel?.isFavoriteSelected ?? false ? Numbers.oneInt : Numbers.zeroInt
+        selectedSegmentIndex = viewModel?.isFavoriteTabSelected ?? false ? Numbers.oneInt : Numbers.zeroInt
         addTarget(self, action: #selector(self.segmentedValueChanged(sender:)), for: .valueChanged)
         
         removeBorders()
@@ -31,7 +31,7 @@ class SegmentedControl: BaseSegmentedControl {
         guard let selected: SegmentedChar = SegmentedChar(rawValue: sender.selectedSegmentIndex)
         else { return }
         
-        viewModel?.segmentedSelected(with: selected)
+        viewModel?.tabSelected(with: selected)
     }
 
     override init(items: [Any]?) {

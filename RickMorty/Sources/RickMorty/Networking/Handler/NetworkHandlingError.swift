@@ -19,11 +19,11 @@ struct NetworkHandlingError {
         case NSURLErrorTimedOut:
             gnerror = CustomNetworkError(.timeout)
             break
-        case NSURLErrorNotConnectedToInternet, NSURLErrorNetworkConnectionLost:
+        case NSURLErrorNotConnectedToInternet, NSURLErrorNetworkConnectionLost, NSURLErrorDataNotAllowed:
             gnerror = CustomNetworkError(.noInternet)
             break
         default:
-            gnerror = CustomNetworkError(.custom)
+            gnerror = CustomNetworkError(.unknown)
             break
         }
         observer.onError(gnerror)
@@ -41,7 +41,7 @@ struct NetworkHandlingError {
             gnerror = CustomNetworkError(.noInternet)
             break
         default:
-            gnerror = CustomNetworkError(.custom)
+            gnerror = CustomNetworkError(.unknown)
             break
         }
         completion(.failure(gnerror))
