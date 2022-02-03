@@ -34,7 +34,7 @@ let package = Package(
             name: "RickMortyTests",
             dependencies: ["RickMorty"],
             resources: [
-                .copy("Resourc")
+                .copy("ResourceMock")
             ]
         )
     ]

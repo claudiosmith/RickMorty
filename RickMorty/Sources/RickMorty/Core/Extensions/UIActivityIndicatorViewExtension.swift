@@ -13,7 +13,7 @@ public extension UIActivityIndicatorView {
     func show(_ shouldShow: Bool, at subview: UIView? = nil) {
 
         guard subview != nil else {
-            guard let frontWindow = UIApplication.shared.keyWindow else { return }
+            guard let frontWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
             create(in: frontWindow)
             show(shouldShow)
             return
@@ -36,7 +36,7 @@ public extension UIActivityIndicatorView {
 
     func create(at subview: UIView? = nil) {
         guard subview != nil else {
-           guard let frontWindow = UIApplication.shared.keyWindow else { return }
+           guard let frontWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
            create(in: frontWindow)
            return
         }

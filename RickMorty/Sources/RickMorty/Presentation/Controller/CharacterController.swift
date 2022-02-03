@@ -16,6 +16,7 @@ class CharacterController: BaseController {
     lazy var viewModel = CharacterViewModel()
     lazy var characterView = CharacterView()
     lazy var indicatorView = UIActivityIndicatorView()
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class CharacterController: BaseController {
     private func loadCharacterView() {
         characterView = CharacterView(delegate: delegate, viewModel: viewModel)
         addCharacterView()
+        binding()
         bindingError()
     }
     
@@ -42,6 +44,13 @@ class CharacterController: BaseController {
         ])
     }
     
+    func binding() {
+        viewModel.observerCharacterList.observeOn(MainScheduler.instance)
+            .subscribe (onNext: { [weak self] characters in
+                self?.indicatorView.stop()
+        }).disposed(by: disposeBag)
+    }
+    
     func bindingError() {
         
         viewModel.onError = { [weak self] (error) in
@@ -55,5 +64,4 @@ class CharacterController: BaseController {
             }
         }
     }
-    
 }
