@@ -9,4 +9,4 @@ Swift Package Manager Library iOS that uses TV Show Rick and Morty API
 
 * Third-party: RXSwift
 
-It comes with demo project with built-in library, just click the play button to see the app running
+It comes with demo project and built-in library, just click the play button to see the app running
