@@ -136,13 +136,14 @@ class CharacterViewModel {
         let favourite = !viewdata.favourite
         guard favourite == false else {
             favouriteList.append(characterList[index])
+            CharacterPlistHandler().write(favouriteList)
             return
         }
+        
         if let ind = favouriteList.firstIndex( where: { $0.id == viewdata.id }) {
             favouriteList.remove(at: ind)
-            return
+            CharacterPlistHandler().write(favouriteList)
         }
-        CharacterPlistHandler().write(favouriteList)
     }
     
     func loadInfinityScroll() {
