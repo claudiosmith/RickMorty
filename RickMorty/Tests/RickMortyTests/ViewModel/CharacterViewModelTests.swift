@@ -5,7 +5,7 @@ import RxSwift
 
 final class CharacterViewModelTests: XCTestCase {
     
-    func testFetchNormalCharacters() {
+    func testCharacterShouldExists() {
         
         let name = "Rick Sanchez"
         let disposeBag = DisposeBag()
@@ -28,6 +28,35 @@ final class CharacterViewModelTests: XCTestCase {
         }).disposed(by: disposeBag)
 
         wait(for: [expectNormalCharacters], timeout: 1.0)
+    }
+    
+    func testFetchWithApiError() {
+
+        let disposeBag = DisposeBag()
+        var appServerClient = MockCharacterService()
+
+        appServerClient.fetchCharacterResult = .failure(CustomNetworkError(.invalidData))
+        
+        let viewModel = CharacterViewModel(appServerClient, cache: nil)
+        viewModel.fetchCharacters()
+        
+        let expectedError = expectation(description: "failure fetch characters")
+        var invalidOrNotFoundDataError = false
+        
+        viewModel.unitError.subscribe(onNext: {(error) in
+            
+            if let error = error as? CustomNetworkError,
+               let message = error.failureDescription,
+               message == ServiceError.invalidData.errorMessage {
+               invalidOrNotFoundDataError = true
+            }
+            
+            XCTAssertTrue(invalidOrNotFoundDataError, ServiceError.invalidData.errorMessage)
+            expectedError.fulfill()
+            
+        }).disposed(by: disposeBag)
+
+        wait(for: [expectedError], timeout: 1.0)
     }
 
 }

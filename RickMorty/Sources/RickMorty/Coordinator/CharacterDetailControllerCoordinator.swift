@@ -12,7 +12,7 @@ protocol CharacterDetailCoordinatorProtocol: AnyObject {
     func backToPreviousController()
 }
 
-class CharacterDetailControllerCoordinator: Coordinator {
+final class CharacterDetailControllerCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
     var viewModel: CharacterViewModel?
@@ -37,6 +37,5 @@ class CharacterDetailControllerCoordinator: Coordinator {
         controller.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(controller, animated: true)
     }
-    
     
 }

@@ -22,7 +22,7 @@ protocol NetworkClientProtocol {
     func loadImage(_ url: URL, _ completion: @escaping (Completion)) 
 }
 
-class NetworkClient: NetworkClientProtocol {
+final class NetworkClient: NetworkClientProtocol {
     
     func loadImage(_ url: URL, _ completion: @escaping (Completion)) {
         

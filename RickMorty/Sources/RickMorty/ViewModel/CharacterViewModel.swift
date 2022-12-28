@@ -10,12 +10,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class CharacterViewModel {
+final class CharacterViewModel {
 
     let observerPhoto: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     let observerLine: BehaviorRelay<SegmentedChar?> = BehaviorRelay(value: nil)
     let unitError = BehaviorRelay<Error?>(value: nil)
-    let error = PublishSubject<Error>()
     let observerCharacter = BehaviorRelay<[CharacterViewData]>(value: [])
     let observerCharacterList = BehaviorRelay<[CharacterViewData]>(value: [])
     

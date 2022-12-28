@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CharacterDetailView: UIView {
+final class CharacterDetailView: UIView {
 
     var viewdata: CharacterViewData?
     

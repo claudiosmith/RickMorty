@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CharacterCell: BaseCollectionViewCell {
+final class CharacterCell: BaseCollectionViewCell {
 
     lazy var rickyImage: UIImageView = UIImageView()
     lazy var favButton: UIButton = UIButton()

@@ -12,10 +12,9 @@ protocol CharacterControllerProtocol: AnyObject {
     func navigateToCharacterDetails(_ viewModel: CharacterViewModel?, viewdata: CharacterViewData)
 }
 
-class CharacterControllerCoordinator: Coordinator {
+final class CharacterControllerCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
-    weak var delegate: CharacterControllerProtocol?
     unowned let navigationController: NavigationController
    
     required init(_ navigator: NavigationController) {

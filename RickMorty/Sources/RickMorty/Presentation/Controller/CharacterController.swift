@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class CharacterController: BaseController {
+final class CharacterController: BaseController {
     
     var delegate: CharacterControllerProtocol?
     lazy var viewModel = CharacterViewModel()

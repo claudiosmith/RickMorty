@@ -14,7 +14,7 @@ enum SegmentedChar: Int {
     case all, favorites
 }
 
-class SegmentedControl: BaseSegmentedControl {
+final class SegmentedControl: BaseSegmentedControl {
     var viewModel: CharacterViewModel?
     
     func setup(viewModel: CharacterViewModel?) {

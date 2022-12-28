@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class CharacterView: UIView {
+final class CharacterView: UIView {
 
     weak var delegate: CharacterControllerProtocol?
     lazy var leftConstraint = NSLayoutConstraint()

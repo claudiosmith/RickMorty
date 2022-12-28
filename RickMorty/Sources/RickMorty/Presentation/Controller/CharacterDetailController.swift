@@ -14,7 +14,7 @@ protocol CharacterDetailControllerProtocol: AnyObject {
     func backToCharacterCoordinator()
 }
 
-class CharacterDetailController: BaseController {
+final class CharacterDetailController: BaseController {
     
     var viewModel: CharacterViewModel?
     var viewdata: CharacterViewData?
