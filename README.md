@@ -1,7 +1,7 @@
 
 Swift Package Manager Library iOS that uses TV Show Rick and Morty API
 
-* Minimum requirements: Xcode 12, iOS 13
+* Minimum requirements: Xcode 13, iOS 15
 
 * Language: Swift 5.3
 
