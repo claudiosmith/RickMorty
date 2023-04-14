@@ -36,7 +36,7 @@ extension CharacterCell {
             rickyImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Numbers.zeroCGFloat),
         ])
         
-        self.bringSubviewToFront(favButton)
+        bringSubviewToFront(favButton)
     }
     
     private func addViews() {

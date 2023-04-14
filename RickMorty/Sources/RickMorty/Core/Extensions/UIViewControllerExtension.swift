@@ -15,20 +15,20 @@ extension UIViewController {
         navigationController?.navigationBar.tintColor = .white
         let arrowLeft = XCImage(named: Assets.arrowLeft)
         let backBarItem = UIBarButtonItem(image: arrowLeft, style: .plain, target: self, action: action)
-        self.navigationItem.leftBarButtonItem = backBarItem
+        navigationItem.leftBarButtonItem = backBarItem
     }
     
     func alert(message: String, title: String? = nil, completion: @escaping (_ result: Bool) -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         present(alert, animated: true, completion: nil)
         
-        alert.addAction(UIAlertAction(title: Constants.ok, style: .default,
-                                      handler: { action in
+        alert.addAction(UIAlertAction(title: Constants.okay, style: .default,
+                                      handler: { _ in
             completion(true)
         }))
     }
     
     func instanceXib() -> Self {
-        return Self(nibName: self.getClassId(), bundle: self.getBundle())
+        return Self(nibName: getClassId(), bundle: getBundle())
     }
 }

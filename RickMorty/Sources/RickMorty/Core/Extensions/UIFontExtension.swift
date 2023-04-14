@@ -11,25 +11,25 @@ import UIKit
 extension UIFont {
     
     static var family: String {
-        get { return "Avenir" }
+        return "Avenir"
     }
     
     static var familyRegular: String {
-        get { return "\(family)-Medium" }
+        return "\(family)-Medium"
     }
     static var familyBold: String {
-        get { return "\(family)-Black" }
+        return "\(family)-Black"
     }
     
     static func regular(size: CGFloat) -> UIFont {
-        guard let reg = Self.init(name: UIFont.familyRegular, size: size) else {
+        guard let reg = Self(name: UIFont.familyRegular, size: size) else {
             return Self.systemFont(ofSize: size)
         }
         return reg
     }
     
     static func bold(size: CGFloat) -> UIFont {
-        guard let reg = Self.init(name: UIFont.familyBold, size: size) else {
+        guard let reg = Self(name: UIFont.familyBold, size: size) else {
             return Self.systemFont(ofSize: size)
         }
         return reg

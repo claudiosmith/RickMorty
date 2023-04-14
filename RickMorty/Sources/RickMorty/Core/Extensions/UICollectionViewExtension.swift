@@ -19,10 +19,5 @@ extension UICollectionView {
     func register(_ cellType: UICollectionViewCell.Type) {
          register(cellType, forCellWithReuseIdentifier: cellType.init().getClassId())
     }
-    
-    func reloadData(completion:@escaping ()->()) {
-        UIView.animate(withDuration: 0, animations: { self.reloadData() })
-        { _ in completion() }
-    }
 
 }

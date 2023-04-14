@@ -17,7 +17,7 @@ extension NSObject {
     
     func getClassId() -> String {
         
-        var classId: String = self.classForCoder.description()
+        var classId: String = classForCoder.description()
         if let name = classId.components(separatedBy: ".").last {
             classId = name
         }

@@ -46,7 +46,7 @@ final class CharacterController: BaseController {
     
     func binding() {
         viewModel.observerCharacterList.observeOn(MainScheduler.instance)
-            .subscribe (onNext: { [weak self] characters in
+            .subscribe(onNext: { [weak self] _ in
                 self?.indicatorView.stop()
         }).disposed(by: disposeBag)
     }

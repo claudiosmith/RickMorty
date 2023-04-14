@@ -31,7 +31,7 @@ extension CharacterView {
         NSLayoutConstraint.activate([
             lineview.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor,
                                           constant: Numbers.zeroCGFloat),
-            leftConstraint, lineview.widthAnchor.constraint(equalToConstant:  CharacterVal.lineWidth),
+            leftConstraint, lineview.widthAnchor.constraint(equalToConstant: CharacterVal.lineWidth),
             lineview.heightAnchor.constraint(equalToConstant: CharacterVal.lineHeight)
         ])
         

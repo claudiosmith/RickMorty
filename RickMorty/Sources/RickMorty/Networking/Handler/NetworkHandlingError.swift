@@ -11,38 +11,32 @@ import RxSwift
 
 struct NetworkHandlingError {
 
-    func errorHandler<T>(_ error: Error?, _ observer: AnyObserver<T>)  {
+    func errorHandler<T>(_ error: Error?, _ observer: AnyObserver<T>) {
 
         var gnerror: CustomNetworkError
 
         switch error?._code {
         case NSURLErrorTimedOut:
             gnerror = CustomNetworkError(.timeout)
-            break
         case NSURLErrorNotConnectedToInternet, NSURLErrorNetworkConnectionLost, NSURLErrorDataNotAllowed:
             gnerror = CustomNetworkError(.noInternet)
-            break
         default:
             gnerror = CustomNetworkError(.unknown)
-            break
         }
         observer.onError(gnerror)
     }
     
-    func errorCompletionHandler(_ error: Error?, _ completion: Completion)  {
+    func errorCompletionHandler(_ error: Error?, _ completion: Completion) {
 
         var gnerror: CustomNetworkError
 
         switch error?._code {
         case NSURLErrorTimedOut:
             gnerror = CustomNetworkError(.timeout)
-            break
         case NSURLErrorNotConnectedToInternet, NSURLErrorNetworkConnectionLost:
             gnerror = CustomNetworkError(.noInternet)
-            break
         default:
             gnerror = CustomNetworkError(.unknown)
-            break
         }
         completion(.failure(gnerror))
     }

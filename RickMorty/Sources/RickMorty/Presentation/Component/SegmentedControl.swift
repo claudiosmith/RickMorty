@@ -21,7 +21,7 @@ final class SegmentedControl: BaseSegmentedControl {
        
         self.viewModel = viewModel
         selectedSegmentIndex = viewModel?.isFavoriteTabSelected ?? false ? Numbers.oneInt : Numbers.zeroInt
-        addTarget(self, action: #selector(self.segmentedValueChanged(sender:)), for: .valueChanged)
+        addTarget(self, action: #selector(segmentedValueChanged(sender:)), for: .valueChanged)
         
         removeBorders()
     }

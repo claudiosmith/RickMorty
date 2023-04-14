@@ -30,7 +30,7 @@ final class CharacterViewModel {
     private let disposeBag = DisposeBag()
     var cache: NSCache<NSString, UIImage>?
     
-    init(){}
+    init() {}
 
     init(_ service: CharacterServiceProtocol?, cache: NSCache<NSString, UIImage>?) {
         self.service = service
@@ -67,21 +67,21 @@ final class CharacterViewModel {
         observerLine.accept(selected)
         
         guard selected == .favorites else {
-            self.observableCharacters()
+            observableCharacters()
             return
         }
-        self.fetchFavCharacters()
+        fetchFavCharacters()
     }
     
     func fetchFavCharacters() {
         isFavoriteTabSelected = true
-        self.observerCharacter.accept(self.favouriteList)
+        observerCharacter.accept(favouriteList)
     }
     
     func observableCharacters() {
         isFavoriteTabSelected = false
-        self.observerCharacter.accept(self.characterList)
-        self.observerCharacterList.accept(self.characterList)
+        observerCharacter.accept(characterList)
+        observerCharacterList.accept(characterList)
     }
     
     func fetchImage(_ data: CharacterViewData?, _ completion: @escaping (Completion)) {
@@ -92,7 +92,8 @@ final class CharacterViewModel {
             switch result {
             case .success(let image):
                 guard let self = self,
-                      let index = self.characterList.firstIndex( where: { $0.id == data.id }) else { return }
+                      let index = self.characterList.firstIndex( where: { $0.id == data.id })
+                else { return }
                 
                 self.characterList[index].image = image
                 self.observerCharacterList.accept(self.characterList)
@@ -107,8 +108,8 @@ final class CharacterViewModel {
         guard let favourites = CharacterPlistHandler().read(using: characterList) else {
               return
         }
-        self.characterList = favourites.charlist
-        self.favouriteList = favourites.favlist
+        characterList = favourites.charlist
+        favouriteList = favourites.favlist
     }
 
     func updateFavourite(viewdata: CharacterViewData?) {
@@ -149,7 +150,7 @@ final class CharacterViewModel {
         
         guard loadingStatus == false && isFavoriteTabSelected == false else { return }
         loadingStatus = true
-        self.fetchCharacters(info)
+        fetchCharacters(info)
     }
     
 }

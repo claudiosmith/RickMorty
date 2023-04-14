@@ -22,11 +22,9 @@ class BaseController: UIViewController {
                 navigationController?.navigationBar.topItem?.title = CharacterVal.title
             case is CharacterDetailController:
                 navigationItem.title = DetailVal.title
-            break
-
-            default:break
+            default: break
         }
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil;
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
 }

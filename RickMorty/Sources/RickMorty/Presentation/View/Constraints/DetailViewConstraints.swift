@@ -14,7 +14,7 @@ extension CharacterDetailView {
         
         addSubview(rickyImage)
         addSubview(boxView)
-
+        
         boxView.addSubview(nameLabel)
         boxView.addSubview(ballColor)
         boxView.addSubview(statusLabel)
@@ -23,13 +23,15 @@ extension CharacterDetailView {
         boxView.addSubview(originTitleLabel)
         boxView.addSubview(locationTitleLabel)
     }
-
+    
     func setupUI() {
-
         backgroundColor = .black
         addSubViews()
         setupBoxView()
-
+        makeConstraints()
+    }
+    
+    func makeConstraints() {
         let width: CGFloat = UIScreen.main.bounds.width
         rickyImage.translatesAutoresizingMaskIntoConstraints = false
         
@@ -64,7 +66,7 @@ extension CharacterDetailView {
             ballColor.heightAnchor.constraint(equalToConstant: DetailVal.ballRadius),
             ballColor.widthAnchor.constraint(equalTo: ballColor.heightAnchor, multiplier: Numbers.oneCGFloat)
         ])
-       
+        
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             statusLabel.centerYAnchor.constraint(equalTo: ballColor.centerYAnchor),
@@ -73,7 +75,13 @@ extension CharacterDetailView {
             statusLabel.trailingAnchor.constraint(equalTo: boxView.trailingAnchor, constant: DetailVal.margin),
             statusLabel.heightAnchor.constraint(equalToConstant: DetailVal.labelHeight),
         ])
-
+        
+        makeOriginConstraints()
+        makeLocationConstraints()
+    }
+    
+    func makeOriginConstraints() {
+        
         originTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             originTitleLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: DetailVal.topTitleMargin),
@@ -81,7 +89,7 @@ extension CharacterDetailView {
             originTitleLabel.trailingAnchor.constraint(equalTo: boxView.trailingAnchor, constant: DetailVal.margin),
             originTitleLabel.heightAnchor.constraint(equalToConstant: DetailVal.labelHeight),
         ])
-       
+        
         originLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             originLabel.topAnchor.constraint(equalTo: originTitleLabel.bottomAnchor, constant: DetailVal.topMargin),
@@ -89,7 +97,9 @@ extension CharacterDetailView {
             originLabel.trailingAnchor.constraint(equalTo: boxView.trailingAnchor, constant: DetailVal.margin),
             originLabel.heightAnchor.constraint(equalToConstant: DetailVal.labelHeight),
         ])
-       
+    }
+    
+    func makeLocationConstraints() {
         locationTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             locationTitleLabel.topAnchor.constraint(equalTo: originLabel.bottomAnchor, constant: DetailVal.topTitleMargin),
@@ -97,7 +107,7 @@ extension CharacterDetailView {
             locationTitleLabel.trailingAnchor.constraint(equalTo: boxView.trailingAnchor, constant: DetailVal.margin),
             locationTitleLabel.heightAnchor.constraint(equalToConstant: DetailVal.labelHeight),
         ])
-       
+        
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             locationLabel.topAnchor.constraint(equalTo: locationTitleLabel.bottomAnchor, constant: DetailVal.topMargin),
@@ -105,6 +115,7 @@ extension CharacterDetailView {
             locationLabel.trailingAnchor.constraint(equalTo: boxView.trailingAnchor, constant: DetailVal.margin),
             locationLabel.heightAnchor.constraint(equalToConstant: DetailVal.labelHeight),
         ])
+        
     }
     
 }

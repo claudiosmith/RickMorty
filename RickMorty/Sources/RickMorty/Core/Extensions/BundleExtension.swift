@@ -12,7 +12,7 @@ extension Bundle {
     
     func loadData(from file: String, `extension`: String = Constants.json) -> Data? {
         
-        guard let fileURL = self.url(forResource: file, withExtension: `extension`) else {
+        guard let fileURL = url(forResource: file, withExtension: `extension`) else {
             print(Constants.fileNotFound)
             return nil
         }
@@ -28,11 +28,11 @@ extension Bundle {
     
     func loadJson(from file: String, `extension`: String = Constants.json) -> [String: Any]? {
         
-        if let path = self.path(forResource: file, ofType: `extension`) {
+        if let path = path(forResource: file, ofType: `extension`) {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let jsonResult = jsonResult as? Dictionary<String, AnyObject> {
+                if let jsonResult = jsonResult as? [String: AnyObject] {
                    return jsonResult
                 }
             } catch { print(error) }
@@ -42,8 +42,13 @@ extension Bundle {
     }
     
     var appName: String {
-        let name = object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
-        return name ?? object(forInfoDictionaryKey: kCFBundleNameKey as String) as! String
+        guard let name = object(forInfoDictionaryKey: "CFBundleDisplayName") as? String else {
+            guard object(forInfoDictionaryKey: kCFBundleNameKey as String) is String else {
+                return .empty
+            }
+            return .empty
+        }
+        return name
     }
     
 }

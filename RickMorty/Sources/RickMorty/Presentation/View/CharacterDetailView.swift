@@ -15,7 +15,7 @@ final class CharacterDetailView: UIView {
     convenience init(viewdata: CharacterViewData?) {
         self.init()
         self.viewdata = viewdata
-        self.rickyImage.image = viewdata?.image
+        rickyImage.image = viewdata?.image
         
         bindData(data: viewdata)
         initSubView()
@@ -37,8 +37,8 @@ final class CharacterDetailView: UIView {
         
         let bounds = UIScreen.main.bounds
         self.bounds = bounds
-        self.frame = bounds
-        self.backgroundColor = .black
+        frame = bounds
+        backgroundColor = .black
        
         setupUI()
     }
@@ -67,34 +67,34 @@ final class CharacterDetailView: UIView {
 
     lazy var boxView = UIView()
     lazy var ballColor = UIView()
-    let rickyImage: UIImageView = { let f = UIImageView()
-        f.contentMode = .scaleAspectFit
-        return f }()
+    let rickyImage: UIImageView = { let fld = UIImageView()
+        fld.contentMode = .scaleAspectFit
+        return fld }()
     
-    let nameLabel: UILabel = { let f = UILabel()
-        f.textColor = .white
-        f.font = UIFont.boldSystemFont(ofSize: 20)
-        return f }()
+    let nameLabel: UILabel = { let fld = UILabel()
+        fld.textColor = .white
+        fld.font = UIFont.boldSystemFont(ofSize: 20)
+        return fld }()
     
-    let statusLabel: UILabel = { let f = UILabel()
-        f.textColor = .white
-        return f }()
+    let statusLabel: UILabel = { let fld = UILabel()
+        fld.textColor = .white
+        return fld }()
     
-    let originTitleLabel: UILabel = { let f = UILabel()
-        f.textColor = .gray
-        return f }()
+    let originTitleLabel: UILabel = { let fld = UILabel()
+        fld.textColor = .gray
+        return fld }()
     
-    let originLabel: UILabel = { let f = UILabel()
-        f.textColor = .white
-        return f }()
+    let originLabel: UILabel = { let fld = UILabel()
+        fld.textColor = .white
+        return fld }()
     
-    let locationTitleLabel: UILabel = { let f = UILabel()
-        f.textColor = .gray
-        return f }()
+    let locationTitleLabel: UILabel = { let fld = UILabel()
+        fld.textColor = .gray
+        return fld }()
     
-    let locationLabel: UILabel = { let f = UILabel()
-        f.textColor = .white
-        return f }()
+    let locationLabel: UILabel = { let fld = UILabel()
+        fld.textColor = .white
+        return fld }()
     
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
     override init(frame: CGRect) {
@@ -103,5 +103,3 @@ final class CharacterDetailView: UIView {
     }
 
 }
-
-

@@ -32,8 +32,8 @@ final class CharacterView: UIView {
     private func initSubView() {
         let bounds = UIScreen.main.bounds
         self.bounds = bounds
-        self.frame = bounds
-        self.backgroundColor = .black
+        frame = bounds
+        backgroundColor = .black
        
         guard viewModel != nil else { return }
 
@@ -46,13 +46,13 @@ final class CharacterView: UIView {
     }
     
     private func setupSegmentedControl() {
-        self.segmentedControl = SegmentedControl(items: [CharacterVal.firstSegment,
-                                                         CharacterVal.secondSegment])
+        segmentedControl = SegmentedControl(items: [CharacterVal.firstSegment,
+                                                    CharacterVal.secondSegment])
         segmentedControl.setup(viewModel: viewModel)
     }
     
     private func setupLineView() {
-        self.lineview.backgroundColor = .white
+        lineview.backgroundColor = .white
     }
 
     func setupCollection() {
@@ -80,15 +80,15 @@ final class CharacterView: UIView {
     
     private func bindingLine() {
         viewModel?.observerLine.observeOn(MainScheduler.instance)
-            .subscribe (onNext: { [weak self] segment in
+            .subscribe(onNext: { [weak self] segment in
                 guard let segment = segment else { return }
                 self?.animate(with: segment)
         }).disposed(by: disposeBag)
     }
     
     private func animate(with segment: SegmentedChar?) {
-        let x = UIScreen.main.bounds.width / Numbers.half + CharacterVal.lineExtraLeading
-        leftConstraint.constant = segment == .favorites ? x : CharacterVal.lineLeading
+        let margin = UIScreen.main.bounds.width / Numbers.half + CharacterVal.lineExtraLeading
+        leftConstraint.constant = segment == .favorites ? margin : CharacterVal.lineLeading
         
         UIView.animate(withDuration: CharacterVal.duration) {
             self.layoutIfNeeded()
