@@ -7,6 +7,6 @@ Swift Package Manager Library iOS that uses TV Show Rick and Morty API
 
 * Architecture: MVVM and Coordinator (MVVM-c)
 
-* Third-party: RXSwift
+* Third-party: RXSwift, SwiftLint
 
 It comes with demo project and built-in module, just click the play button to see the app running.
