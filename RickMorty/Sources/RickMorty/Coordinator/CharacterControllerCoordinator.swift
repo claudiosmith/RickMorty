@@ -18,7 +18,7 @@ final class CharacterControllerCoordinator: Coordinator {
     unowned let navigationController: NavigationController
    
     required init(_ navigator: NavigationController) {
-        self.navigationController = navigator
+        navigationController = navigator
     }
     
     func start() {

@@ -19,7 +19,7 @@ extension Data {
             if let dict = dictFromData {
                dictionaryValue = dict
             }
-        } catch{
+        } catch {
             print(error)
         }
        return dictionaryValue

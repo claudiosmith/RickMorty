@@ -26,7 +26,7 @@ struct Constants {
     static let cancel = "Cancelar"
     static let sort = "Ordenar"
     static let filter = "Filtrar"
-    static let ok = "Ok"
+    static let okay = "Ok"
     static let minStatusSuccess = 200
     static let maxStatusSuccess = 300
     static let errorMessageCorrupted = "Dados ausentes ou corrompidos."

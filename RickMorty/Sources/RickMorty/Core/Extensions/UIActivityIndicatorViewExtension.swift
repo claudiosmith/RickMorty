@@ -76,11 +76,11 @@ public extension UIActivityIndicatorView {
 
     func setup() {
         isHidden = true
-        self.style = .large
+        style = .large
         if #available(iOS 13.0, *) {
-            self.style = .medium
+            style = .medium
         } else {
-            self.style = .gray
+            style = .gray
         }
     }
     

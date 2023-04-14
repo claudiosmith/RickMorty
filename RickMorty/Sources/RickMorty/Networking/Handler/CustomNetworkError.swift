@@ -5,7 +5,6 @@
 //  Created by Claudio Smith on 15/01/2021.
 //  Copyright © 2020 smith.c. All rights reserved.
 
-
 import UIKit
 
 protocol CustomNetworkErrorProtocol: Error {
@@ -38,22 +37,22 @@ struct CustomNetworkError: CustomNetworkErrorProtocol {
     public init(_ message: String, _ code: Int) {
         self.message = message
         self.code = code
-        self.title = title ?? "Error"
-        self._description = message
+        title = title ?? "Error"
+        _description = message
     }
 
     public init(_ error: ServiceError, _ title: String? = nil) {
         self.title = title ?? "Error"
-        self._description = error.errorMessage
+        _description = error.errorMessage
         self.error = error
-        self.message = ""
+        message = ""
     }
 
     public init(description: String, code: Int, title: String? = nil) {
         self.title = title ?? "Error"
-        self._description = description
+        _description = description
         self.code = code
-        self.message = description
+        message = description
     }
 }
 

@@ -1,4 +1,3 @@
-
 //  CharacterBuilder.swift
 //  RickyMorty
 //
@@ -22,7 +21,7 @@ extension CharacterBuilderProtocol {
 
     private mutating func loadCharacter(_ data: [Character], _ favourites: [CharacterViewData]?) {
 
-        data.forEach() { element in
+        data.forEach { element in
             
             let id = String(element.id)
             let isFavourite = readFavourite(id, favourites)

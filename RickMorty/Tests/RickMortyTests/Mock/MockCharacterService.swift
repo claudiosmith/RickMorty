@@ -18,7 +18,7 @@ struct MockCharacterService: CharacterServiceProtocol {
     func fetchCharacter(_ url: URL) -> Observable<RmRoot> {
         
         return Observable.create { observer in
-            switch self.fetchCharacterResult {
+            switch fetchCharacterResult {
             case .success(let root):
                 observer.onNext(root)
             case .failure(let error):
@@ -32,7 +32,7 @@ struct MockCharacterService: CharacterServiceProtocol {
     
     func fetchImage(_ url: URL, using cache: NSCache<NSString, UIImage>?, _ completion: @escaping (Completion)) {
         
-            switch self.fetchImageResult {
+            switch fetchImageResult {
             case .success(let image):
                 completion(.success(image))
             case .failure(let error):

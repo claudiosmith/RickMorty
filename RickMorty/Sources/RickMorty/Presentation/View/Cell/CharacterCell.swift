@@ -21,7 +21,7 @@ final class CharacterCell: BaseCollectionViewCell {
     }
     
     override func prepareForReuse() {
-        self.rickyImage.image = nil
+        rickyImage.image = nil
     }
     
     override func bindData<T>(data: T) {
@@ -32,13 +32,13 @@ final class CharacterCell: BaseCollectionViewCell {
     }
     
     @objc func favAction() {
-        self.viewModel?.updateFavourite(viewdata: character)
+        viewModel?.updateFavourite(viewdata: character)
     }
     
     private func setupFavButton(with data: CharacterViewData) {
         favButton.setTitle(data.favButtonTitle, for: .normal)
         favButton.titleLabel?.font = UIFont.systemFont(ofSize: CharacterVal.favoriteSize)
-        favButton.addTarget(self, action: #selector(self.favAction), for: .touchUpInside)
+        favButton.addTarget(self, action: #selector(favAction), for: .touchUpInside)
     }
 
     override init(frame: CGRect) {
@@ -52,7 +52,7 @@ final class CharacterCell: BaseCollectionViewCell {
 
 extension CharacterCell {
     
-    func setImage(with data: CharacterViewData) {
+    private func setImage(with data: CharacterViewData) {
         
         viewModel?.fetchImage(data) { [weak self] result in
             switch result {
@@ -60,7 +60,6 @@ extension CharacterCell {
                 DispatchQueue.main.async {
                     self?.rickyImage.image = image
                 }
-                break
             case .failure(let error):
                 print("error: ", error.localizedDescription)
             }

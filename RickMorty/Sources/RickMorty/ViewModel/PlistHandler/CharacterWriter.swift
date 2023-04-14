@@ -24,7 +24,7 @@ struct CharacterPlistHandler: CharacterPlistHandlerProtocol {
         }
         do {
             let plistDecoder = PropertyListDecoder()
-            let data = try Data.init(contentsOf: url)
+            let data = try Data(contentsOf: url)
             let favPlist = try plistDecoder.decode([FavouriteViewData].self, from: data)
             let newlists = convertFromPlist(favplist: favPlist, characterList: characters)
             return newlists
@@ -42,7 +42,7 @@ struct CharacterPlistHandler: CharacterPlistHandlerProtocol {
         var characters = characterList,
             favorites: [CharacterViewData] = [CharacterViewData]()
         
-        favplist.forEach() { element in
+        favplist.forEach { element in
             guard let index = characterList.firstIndex( where: { $0.id == element.id }) else { return }
             
             characters[index].favourite = true
@@ -75,7 +75,7 @@ struct CharacterPlistHandler: CharacterPlistHandlerProtocol {
     private func convertToPlist(favourites: [CharacterViewData]) -> [FavouriteViewData] {
         var favouritePlist: [FavouriteViewData] = [FavouriteViewData]()
         
-        favourites.forEach() { element in
+        favourites.forEach { element in
             let viewdata = FavouriteViewData(id: element.id, name: element.name)
             favouritePlist.append(viewdata)
         }

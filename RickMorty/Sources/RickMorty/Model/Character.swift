@@ -6,7 +6,7 @@
 //  Copyright © 2021 smith.c. All rights reserved.
 //
 
-struct RmRoot: Codable  {
+struct RmRoot: Codable {
     let info: Info
     let results: [Character]
 }
